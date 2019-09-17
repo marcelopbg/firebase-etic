@@ -54,7 +54,12 @@ export default {
   }),
   methods: {
       sendShitToFb() {         
-          firebase.database().ref('topicos/').push({title: this.title, description: this.description})
+          try {
+          const response = firebase.database().ref('topicos/').push({title: this.title, description: this.description})
+          alert(response);
+        } catch(e) {
+            return e;
+        }
       }
   }
 };
