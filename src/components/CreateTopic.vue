@@ -15,16 +15,17 @@
             label="Descrição"
           ></v-textarea>
         </v-row>
-         <input
-            class="form-control"
-            type="file"
-            ref="fileInput"
-            style
-            accept="image/*"
-            @change="onFilePicked"
-          >
         <v-row>
-          <v-btn class="ma-2" tile color="indigo" dark v-on:click="sendShitToFb()">Salvar</v-btn>
+          <v-file-input
+            accept="image/png, image/jpeg, image/bmp"
+            placeholder="Selecione uma imagem de fundo"
+            prepend-icon="mdi-camera"
+            label="Imagem"
+            v-on:change="onFilePicked"
+          ></v-file-input>
+        </v-row>
+        <v-row>
+          <v-btn class="ma-2" tile color="indigo" dark v-on:click="sendFile()">Salvar</v-btn>
         </v-row>
       </v-container>
     </v-form>
@@ -33,6 +34,7 @@
 
 <script>
 import firebase from "firebase";
+// import { log } from 'util';
 
 export default {
   data: () => ({
@@ -52,28 +54,57 @@ export default {
     ]
   }),
   methods: {
-    sendShitToFb() {
+    sendFile() {
       try {
-        const response = firebase
-          .database()
-          .ref("topicos/")
-          .push({ title: this.title, description: this.description, timestamp: new Date().getTime() });
-        alert(response);
+        const filename = this.fileName;
+        let randomString = Math.random()
+          .toString(36)
+          .substring(5);
+        const ext = filename.slice(filename.lastIndexOf("."));
+        firebase
+          .storage()
+          .ref("home/" + randomString + ext)
+          .put(this.image)
+          .then(response => {
+            firebase
+              .storage()
+              .ref("home/")
+              .child(response.ref.name)
+              .getDownloadURL()
+              .then(url => {
+                this.sendShitToFb(url);
+              });
+          });
       } catch (e) {
         return e;
       }
     },
-      onFilePicked(event) {
-      const files = event.target.files;
-      let filename = files[0].name;
-      if (filename.lastIndexOf(".") <= 0) {
-        return alert("Please add a valid field!");
+    sendShitToFb(url) {
+      try {
+        const response = firebase
+          .database()
+          .ref("topicos/")
+          .push({
+            title: this.title,
+            description: this.description,
+            image: url,
+            timestamp: new Date().getTime()
+          });
+        this.snackbar = true;
+        this.$router.push({name: 'feed', params: {snackbar: true}})
+        return response;
+      } catch (e) {
+        return e;
       }
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(files[0]);
-      this.image = files[0];
-      this.fileName = files[0].name;
     },
+
+    onFilePicked(event) {
+      const file = event;
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      this.image = file;
+      this.fileName = file.name;
+    }
   }
 };
 </script>

@@ -17,7 +17,7 @@ const firebaseConfig = {
   authDomain: "e-tic-app.firebaseapp.com",
   databaseURL: "https://e-tic-app.firebaseio.com",
   projectId: "e-tic-app",
-  storageBucket: "",
+  storageBucket: "gs://e-tic-app.appspot.com",
   messagingSenderId: "1945285727",
   appId: "1:1945285727:web:4dccf77d83aae0c08a57ea"
 };
@@ -27,7 +27,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 const routes = [
-  {path: '/', component: Feed},
+  {path: '/', component: Feed, props: true, name: 'feed' },
   {path: '/topic/create', component: CreateTopic}
 ]
 

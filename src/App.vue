@@ -25,7 +25,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="indigo" dark>
+    <v-app-bar app color="black" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>e-tic App</v-toolbar-title>
     </v-app-bar>
@@ -33,7 +33,7 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="indigo" app>
+    <v-footer color="black" app>
       <span class="white--text">&copy; 2019</span>
     </v-footer>
   </v-app>
