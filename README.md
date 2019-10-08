@@ -1,5 +1,12 @@
-# my-app
+## Create Project
+```
+vue create my-app
 
+vue add vuetify
+
+npm install firebase --save
+
+```
 ## Project setup
 ```
 npm install
