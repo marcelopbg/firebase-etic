@@ -22,7 +22,7 @@
             :counter="200"
             name="input-7-1"
             label="Comentar..."
-            prepend-icon="mdi-camera"
+            prepend-icon="mdi-comment"
           ></v-textarea>
     </v-row>
     <v-row  align="center" justify="center">
@@ -69,8 +69,8 @@ export default {
 
 <style>
 .customTextArea {
-  width: 500px; 
-  height: 50px;
+  max-width: 500px; 
+  max-height: 50px;
   margin: 0 auto;
   margin-bottom: 150px;
 }

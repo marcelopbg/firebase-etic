@@ -8,6 +8,8 @@ import '@mdi/font/css/materialdesignicons.css'
 import Feed from './components/Feed'
 import CreateTopic from './components/CreateTopic'
 import Topic from './components/Topic'
+import Login from './components/Login'
+import Register from './components/Register'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -31,6 +33,9 @@ const routes = [
   {path: '/', component: Feed, props: true, name: 'feed' },
   {path: '/topic/create', component: CreateTopic},
   {path: '/topic/:id', props:true, component: Topic, name: 'Topic'},
+  {path: '/login', component: Login, name: 'Login' },
+  {path: '/register', component: Register, name: 'Register' },
+
 ]
 
 const router = new VueRouter({

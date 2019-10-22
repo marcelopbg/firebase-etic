@@ -34,8 +34,6 @@
 
 <script>
 import firebase from "firebase";
-// import { log } from 'util';
-
 export default {
   data: () => ({
     title: "",
@@ -53,6 +51,11 @@ export default {
         "Descrição deve conter no máximo 200 caractéres"
     ]
   }),
+  mounted: function() {
+    if(!firebase.auth().currentUser) {
+      this.$router.push({name: 'Login'})
+    }
+  },
   methods: {
     sendFile() {
       try {
