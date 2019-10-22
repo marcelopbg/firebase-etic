@@ -6,6 +6,8 @@ vue add vuetify
 
 npm install firebase --save
 
+npm install vue-router --save
+
 ```
 ## Project setup
 ```
