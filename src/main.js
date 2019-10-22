@@ -7,6 +7,7 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import Feed from './components/Feed'
 import CreateTopic from './components/CreateTopic'
+import Topic from './components/Topic'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -28,7 +29,8 @@ const db = firebase.database();
 
 const routes = [
   {path: '/', component: Feed, props: true, name: 'feed' },
-  {path: '/topic/create', component: CreateTopic}
+  {path: '/topic/create', component: CreateTopic},
+  {path: '/topic/:id', props:true, component: Topic, name: 'Topic'},
 ]
 
 const router = new VueRouter({
